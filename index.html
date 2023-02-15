@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão do Tempo - Mogi das Cruzes</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+    <!-- <h1>Previsão do Tempo - Mogi das Cruzes</h1>
+    <p id="temperatura">Carrregando...</p>
+
+    <label>LOCAL DE BUSCA</label><br>
+    <input type="text" id="local" placeholder="Digite o local..." autocomplete="off">
+    <button onclick="getWeather()">Buscar</button> -->
+
+
+
+
+    <div class="box">
+        <div class="form-box_login">
+            <h2>- Previsão do Tempo -</h2> <br>
+
+            <form action="#">
+
+                <div class="input-group w50">
+                    <label>BUSQUE PELA SUA CIDADE</label><br>
+                    <input type="text" id="local" placeholder="Digite a sua cidade...">
+                </div>
+
+                <p id="temperatura">Carregando...</p><br>
+
+                <div class="input-group">
+                    <button onclick="getWeather()">Buscar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    
+</body>
+
+    <script>
+        //O código usa a biblioteca Axios para realizar uma requisição HTTP a API OpenWeatherMap para obter a previsão do tempo.
+
+        //Esta linha define a função assíncrona, isso significa que a função pode esperar por uma resposta da API.
+
+        async function getWeather() {
+            
+            //Nesta linha estamos fazendo uma chamada a API usando a biblioteca Axios. A URL inclui informações da localização (Mogi das Cruzes) e a unidade de medida (Celsius) e a chave da API (API-KEY).
+
+            var cidade = document.getElementById('local').value;
+
+            const response = await
+            //axios.get('https://api.openweathermap.org/data/2.5/weather?q=Mogi%20das%20Cruzes&units=metric&appid=64ed82577ced7f69cb1687f0ce536131');
+
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=64ed82577ced7f69cb1687f0ce536131`);
+
+            //Aqui estamos extraindo a temperatura atual (Celsius) da resposta de API e armazenando na variável tempCelsius.
+            const tempCelsius = response.data.main.temp;
+
+            //Exibir o valor.
+            document.querySelector ('#temperatura').innerHTML = `A temperatura atual em ${cidade} é de ${tempCelsius}°C`;
+
+        }
+
+        //Chamando a função getWeather para iniciar a consulta a API.
+        getWeather();
+    </script>
+
+</html>
